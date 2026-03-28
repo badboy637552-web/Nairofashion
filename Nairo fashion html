@@ -1,0 +1,134 @@
+# Nairofashion
+Nairo fashion is a fully functional e Commerce website
+import React, { useState } from "react";
+
+export default function NairoFashion() {
+  const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const products = [
+    { id: 1, name: "Men T-Shirt", price: 499 },
+    { id: 2, name: "Women Dress", price: 999 },
+    { id: 3, name: "Kids Shoes", price: 799 },
+    { id: 4, name: "Leather Belt", price: 299 },
+  ];
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="p-4">
+      {/* Navbar */}
+      <nav className="flex justify-between items-center bg-black text-white p-4 rounded-2xl">
+        <h1 className="text-xl font-bold">Nairo Fashion</h1>
+        <input
+          type="text"
+          placeholder="Search..."
+          className="p-2 rounded text-black"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="bg-white text-black px-4 py-2 rounded">
+          Cart ({cart.length})
+        </button>
+      </nav>
+
+      {/* Hero Section */}
+      <div className="mt-6 bg-gray-100 p-6 rounded-2xl text-center">
+        <h2 className="text-2xl font-bold">Welcome to Nairo Fashion</h2>
+        <p>Best fashion for Men, Women & Kids</p>
+      </div>
+
+      {/* Products */}
+      <div className="grid grid-cols-2 gap-4 mt-6">
+        {filteredProducts.map((product) => (
+          <div key={product.id} className="border p-4 rounded-2xl">
+            <h3 className="font-bold">{product.name}</h3>
+            <p>₹{product.price}</p>
+            <button
+              onClick={() => addToCart(product)}
+              className="bg-black text-white px-3 py-1 mt-2 rounded"
+            >
+              Add to Cart
+            </button>
+            <button className="bg-green-500 text-white px-3 py-1 mt-2 ml-2 rounded">
+              Buy Now
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* Cart Section */}
+      <div className="mt-8">
+        <h2 className="text-xl font-bold">Cart</h2>
+        {cart.map((item, index) => (
+          <div key={index} className="flex justify-between border-b py-2">
+            <span>{item.name}</span>
+            <span>₹{item.price}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Checkout */}
+      <div className="mt-6">
+        <h2 className="text-xl font-bold">Checkout</h2>
+        <p>Payment Methods:</p>
+        <ul>
+          <li>Credit/Debit Card</li>
+          <li>Cash on Delivery</li>
+        </ul>
+      </div>
+
+      {/* Login/Register */}
+      <div className="mt-6">
+        <h2 className="text-xl font-bold">Login / Register</h2>
+        <button className="bg-blue-500 text-white px-4 py-2 mr-2 rounded">
+          Login with Google
+        </button>
+        <button className="bg-blue-700 text-white px-4 py-2 rounded">
+          Login with Facebook
+        </button>
+      </div>
+
+      {/* Profile */}
+      <div className="mt-6">
+        <h2 className="text-xl font-bold">Customer Profile</h2>
+        <p>Name: User</p>
+        <p>Orders: 0</p>
+      </div>
+
+      {/* Order Tracking */}
+      <div className="mt-6">
+        <h2 className="text-xl font-bold">Track Order</h2>
+        <input
+          type="text"
+          placeholder="Enter Order ID"
+          className="border p-2 rounded"
+        />
+        <button className="bg-black text-white px-3 py-2 ml-2 rounded">
+          Track
+        </button>
+      </div>
+
+      {/* Support */}
+      <div className="mt-6">
+        <h2 className="text-xl font-bold">Customer Support</h2>
+        <a
+          href="https://wa.me/916375527033"
+          className="text-green-600 underline"
+        >
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-10 text-center text-gray-500">
+        © 2026 Nairo Fashion. All rights reserved.
+      </footer>
+    </div>
+  );
+}
